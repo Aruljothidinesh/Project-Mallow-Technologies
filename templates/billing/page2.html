@@ -1,0 +1,65 @@
+<h2>Invoice</h2>
+
+<p>Customer Email: {{ purchase.customer_email }}</p>
+
+<table border="1">
+<tr>
+  <th>Product ID</th>
+  <th>Unit Price</th>
+  <th>Qty</th>
+  <th>Purchase Price</th>
+  <th>Tax% for item</th>
+  <th>Tax Payable for item</th>
+  <th>Total Price of the item</th>
+</tr>
+
+{% for item in data.items %}
+<tr>
+  <td>{{ item.product.name }}</td>
+  <td>{{ item.unit_price }}</td>
+  <td>{{ item.qty }}</td>
+  <td>{{ item.purchase_price }}</td>
+  <td>{{ item.tax_percent }}%</td>
+  <td>{{ item.tax }}</td>
+  <td>{{ item.total }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>Bill Summary</h3>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th style="text-align:left;">Description</th>
+    <th style="text-align:right;">Amount</th>
+  </tr>
+
+  <tr>
+    <td>Total Price without tax</td>
+    <td style="text-align:right;">{{ data.total_without_tax }}</td>
+  </tr>
+
+  <tr>
+    <td>Total tax payable</td>
+    <td style="text-align:right;">{{ data.total_tax }}</td>
+  </tr>
+
+  <tr>
+    <td>Net price of the purchased item</td>
+    <td style="text-align:right;">{{ data.net_price }}</td>
+  </tr>
+
+  <tr>
+    <td>Rounded down value of the net price</td>
+    <td style="text-align:right;">{{ data.round_down_net_price }}</td>
+  </tr>
+
+  <tr>
+    <th style="text-align:left;">Balance payable to the Customer</th>
+    <th style="text-align:right;">{{ data.balance }}</th>
+  </tr>
+</table>
+<h3>Balance Denominations</h3>
+{% for denom, count in data.balance_denoms.items %}
+  {{ denom }} : {{ count }} <br>
+{% endfor %}

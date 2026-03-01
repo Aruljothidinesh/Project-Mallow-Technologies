@@ -1,0 +1,5 @@
+<h2>Previous Purchases</h2>
+
+{% for p in purchases %}
+  <a href="#">{{ p.customer_email }} - {{ p.created_at }}</a><br>
+{% endfor %}
